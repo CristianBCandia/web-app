@@ -4,7 +4,7 @@ function App() {
 
   return (
     <>
-      <h1>Meu site ta no ar</h1>
+      <h1>Teste app</h1>
     </>
   )
 }
