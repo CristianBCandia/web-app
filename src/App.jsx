@@ -1,10 +1,13 @@
-import './App.css'
+import { AppBarComponent } from "./components/AppBarComponent"
+import { ProductGridComponent } from "./components/ProductGridComponent"
+import './global/style.css'
 
 function App() {
 
   return (
     <>
-      <h1>Teste app 2</h1>
+      <AppBarComponent></AppBarComponent>
+      <ProductGridComponent></ProductGridComponent>
     </>
   )
 }
