@@ -1,7 +1,6 @@
 import { styled } from "styled-components"
 
 export const AppBar = styled.div`
-    position: fixed;
     width: 100vw;
     font-size: 17px;
     display: flex;
@@ -46,6 +45,14 @@ export const AppBar = styled.div`
             color: #FFF;
             padding: 4px;
             list-style-type: none;
+            
+        }
+        a {
+            color: #FFF;
+            text-decoration: none;
+        }
+        a:hover {
+            border-bottom: solid 1px #FFF;
         }
         li:hover {
             border-bottom: solid 1px #FFF;
