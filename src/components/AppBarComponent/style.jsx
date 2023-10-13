@@ -1,14 +1,12 @@
 import { styled } from "styled-components"
 
 export const AppBar = styled.div`
-    width: 100vw;
-    font-size: 17px;
     display: flex;
+    box-sizing: border-box;
+    font-size: 17px;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 40px;
+    justify-content: center;
     height: 10vh;
-    background-color: #5053f5;
     font-family: 'Roboto';
     color: #FFF;
     div {
@@ -17,19 +15,18 @@ export const AppBar = styled.div`
         font-weight: bold;
     }
     .search {
-        background-color: #6568ff;
         border-radius: 8px;
         padding: 0 20px;
+        height: 45px;
         width: 500px;
         input {
             outline: 0;
-            height: 40px;
+            height: 45px;
             border-radius: 8px;
             padding-left: 15px;
             border: none;
             width: 500px;
-            background-color: #6568ff;
-            color: #FFF;
+            color: #595959;
             font-size: 17px;
         }
     }
@@ -65,11 +62,11 @@ export const AppBar = styled.div`
         }
     }
     ::placeholder {
-        color: #ffffffb7;
+        color: #595959;
         opacity: 1; /* Firefox */
     }
 
     ::-ms-input-placeholder { /* Edge 12 -18 */
-        color: #ffffffb7;
+        color: #595959;
     }
 `

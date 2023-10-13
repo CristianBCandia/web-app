@@ -53,6 +53,5 @@ export const FormBtnSubmit = styled.button`
     font-weight: bold;
     cursor: pointer;
     color: #FFF;
-    background-color: #3e00e7;
     border: solid 1px #FFF;
 `

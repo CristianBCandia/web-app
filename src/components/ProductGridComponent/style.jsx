@@ -2,12 +2,11 @@ import styled from 'styled-components'
 
 export const ProductGridStyled = styled.div`
     display: flex;
-    padding: 15vh 20px;
     justify-content: center;
     flex-wrap: wrap;
     gap: 30px;
     margin: 0 auto;
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    /* box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; */
 `
 
 export const ProductGridCard = styled.div`
@@ -44,3 +43,4 @@ export const ProductDescriptionText = styled.div`
     font-family: "Roboto";
     padding: 20px;
 `
+
