@@ -1,9 +1,10 @@
 import React from 'react';
-import { Breadcrumb, Input, Layout, Menu, theme } from 'antd';
+import { Input, Layout, Menu, theme } from 'antd';
 const { Header, Content, Footer } = Layout;
 import { useNavigate } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import './global/style.css'
+import { BreadcrumbComponent } from './components/Breadcrumb';
 
 function App() {
 
@@ -39,13 +40,9 @@ function App() {
                     onClick={onClick}
                     mode="horizontal"
                     defaultSelectedKeys={['2']}
-                    // items={new Array(3).fill(null).map((_, index) => ({
-                    //     key: String(index + 1),
-                    //     label: `nav ${index + 1}`,
-                    // }))}
                     items={ new Array(
-                        { key: "/products", label: "Estoque" },
-                        { key: "/register", label: "Cadastro" }
+                        { key: "/estoque", label: "Estoque" },
+                        { key: "/cadastro-produto", label: "Cadastro" }
                         )}
                 />
             </Header>
@@ -55,15 +52,7 @@ function App() {
                     padding: '0 50px',
                 }}
             >
-                <Breadcrumb
-                    style={{
-                        margin: '16px 0',
-                    }}
-                >
-                    <Breadcrumb.Item>Home</Breadcrumb.Item>
-                    <Breadcrumb.Item>List</Breadcrumb.Item>
-                    <Breadcrumb.Item>App</Breadcrumb.Item>
-                </Breadcrumb>
+              <BreadcrumbComponent />
                 <div
                     style={{
                         padding: 24,

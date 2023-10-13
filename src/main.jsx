@@ -6,6 +6,7 @@ import './global/style.css'
 import { ConfigProvider, theme } from 'antd';
 import TableAnt from './components/TableAnt';
 import { ProductGridComponent } from './components/ProductGridComponent/index.jsx';
+import { ProductForm } from './components/ProductForm/index.jsx';
 
 
 const router = createBrowserRouter([
@@ -14,12 +15,16 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "/home",
+        path: "/",
         element: <ProductGridComponent />
       }, 
       {
-        path: "/products",
+        path: "/estoque",
         element: <TableAnt />
+      },
+      {
+        path: "/cadastro-produto",
+        element: <ProductForm />
       }
     ]
   }
