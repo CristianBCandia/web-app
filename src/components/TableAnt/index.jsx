@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { DownOutlined } from '@ant-design/icons';
-import { Space, Table, Input, theme, Layout, Menu, Breadcrumb } from 'antd';
-import { useNavigation } from 'react-router-dom';
+import { Space, Table } from 'antd';
 import Spinner from '../Spinner';
-const { Header, Content, Footer } = Layout;
+import { doGet } from '../../api/ajax';
 
 
 const defaultExpandable = {
@@ -37,24 +35,31 @@ const TableAnt = () => {
 
     useEffect(() => {
         if (data == null) {
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    const dataMapped = data.map(item => {
-                        return {
-                            ...item,
-                            ativo: item.ativo ? 'Sim' : 'Não'
-                        }
-                    })
-                    setData(dataMapped)
-                    setHasData(true)
-                    setIsLoading(false)
-                    return data
+            doGet(url)
+            .then(data => {
+                const dataMapped = data.map(item => {
+                    return {
+                        ...item,
+                        ativo: item.ativo ? 'Sim' : 'Não'
+                    }
                 })
-                .then(data => console.log("data", data))
-                .catch(err => console.log(err))
+                setData(dataMapped)
+                setHasData(true)
+                setIsLoading(false)
+                return data
+            })
+            .then(data => console.log("data", data))
+            .catch(err => console.log(err))
         }
     }, [])
+
+    const editProduct = (id) => {
+        console.log("editando produto de id "+ id)
+    }
+
+    const deleteProduct = (id) => {
+
+    }
 
   const scroll = {};
   if (yScroll) {
@@ -68,12 +73,22 @@ const TableAnt = () => {
 
   useEffect(() => {
     if(data && !tableColumns) {
-        const tc = Object.keys(data[0]).map(item => {
+        let tc = Object.keys(data[0]).map(item => {
             return {
                 title: item,
                 dataIndex: item,
               }
         })
+        tc = [...tc, {
+            title: 'Ações',
+            key: 'acoes',
+            render: (_, record) => (
+              <Space size="middle">
+                <a onClick={() => editProduct(record)}>Editar</a>
+                <a onClick={() => deleteProduct(record)}>Excluir</a>
+              </Space>
+            ),
+          }]
         setTableColumns(tc)
     }
   }, [data])

@@ -4,6 +4,8 @@ const { Header, Content, Footer } = Layout;
 import { useNavigate } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import './global/style.css'
+import { BsStack } from 'react-icons/bs'
+import { TiPlusOutline } from 'react-icons/ti'
 import { BreadcrumbComponent } from './components/Breadcrumb';
 
 function App() {
@@ -37,12 +39,12 @@ function App() {
                 <div className="demo-logo" />
                 <Search size="large" style={{ width: 500 }} placeholder="Buscar produto..." onSearch={onSearch} />
                 <Menu
+                    style={{ width: '500px' }}
                     onClick={onClick}
                     mode="horizontal"
-                    defaultSelectedKeys={['2']}
                     items={ new Array(
-                        { key: "/estoque", label: "Estoque" },
-                        { key: "/cadastro-produto", label: "Cadastro" }
+                        { key: "/estoque", label: "Estoque",  icon: <BsStack />},
+                        { key: "/cadastro-produto", label: "Cadastrar Produto", icon: <TiPlusOutline /> }
                         )}
                 />
             </Header>
