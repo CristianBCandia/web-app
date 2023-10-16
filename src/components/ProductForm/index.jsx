@@ -1,5 +1,5 @@
 import { EditTwoTone, FormOutlined, PlusCircleOutlined, PlusOutlined, PlusSquareTwoTone } from '@ant-design/icons';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsCartPlus } from 'react-icons/bs'
 import { TiPlusOutline } from 'react-icons/ti'
 import {
@@ -7,6 +7,7 @@ import {
     Cascader,
     Checkbox,
     DatePicker,
+    Divider,
     Form,
     Input,
     InputNumber,
@@ -19,10 +20,10 @@ import {
     Upload,
     message,
 } from 'antd';
-import { MonetaryInput } from '../MonetaryInput';
 import Title from 'antd/es/typography/Title';
-import { doPost } from '../../api/ajax';
-const { RangePicker } = DatePicker;
+import { doGet, doPost } from '../../api/ajax';
+import { useParams } from 'react-router-dom';
+import Spinner from '../Spinner';
 const { TextArea } = Input;
 const normFile = (e) => {
     if (Array.isArray(e)) {
@@ -30,19 +31,49 @@ const normFile = (e) => {
     }
     return e?.fileList;
 };
-export const ProductForm = () => {
+export const ProductForm = ({ product }) => {
+
+    const { id } = useParams(param => param.id)
+
+    const [spinner, setSpinner] = useState(false)
+
     const [form] = Form.useForm();
 
+    useEffect(() => {
+        if(id) {
+            setSpinner(true)
+            console.log(id)
+            const url = `http://localhost:8080/api/produtos/${id}`
+            doGet(url)
+                .then(product => {
+                    form.setFieldsValue({
+                        id: product.id,
+                        nome: product.nome,
+                        descricao: product.descricao,
+                        categoria: product.categoria,
+                        ativo: product.ativo,
+                        preco: product.preco,
+                        quantidade_estoque: product.quantidade_estoque
+                    })
+                    setSpinner(false)
+                    console.log(product)
+                })
+        }
+    }, [])
+
     const [componentDisabled, setComponentDisabled] = useState(false);
+
     const buttonItemLayout = {
         wrapperCol: {
             span: 14,
             offset: 6,
         },
     }
+
     const onFinish = (values) => {
+        const body = id ? { ...values, id: id } : values
         const url = 'http://localhost:8080/api/produtos'
-        doPost(url, values)
+        doPost(url, body)
             .then(() => message.success('Produto salvo com sucesso!'))
             .catch(err => message.error('Falha ao salvar produto! '+ err))
         console.log(values)
@@ -59,9 +90,12 @@ export const ProductForm = () => {
     };
 
     return (
-        <Space direction="vertical" style={{ width: '100%' }} align='center'>
+        spinner ? <Spinner /> : <Space direction="vertical" style={{ width: '100%' }} align='center'>
 
-            <Title><TiPlusOutline color="#52c41a" /> Novo Produto</Title>
+            <Divider plain>
+                <Title>{ id ? <EditTwoTone /> : <TiPlusOutline /> }{ id ? " Editar Produto" : " Cadastrar Produto"}</Title>
+            </Divider>
+    
             <Form
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
